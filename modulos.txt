@@ -1,0 +1,9 @@
+crm_won_restrict_per_stage
+crm_project_create
+crm_lead_to_task
+crm_lead_code
+crm_lead_search_archive
+crm_salesperson_planner_sale
+crm_salesperson_planner
+l10n_br_fiscal
+helpdesk_mgmt
