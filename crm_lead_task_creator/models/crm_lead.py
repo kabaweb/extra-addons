@@ -11,7 +11,7 @@ class CrmLead(models.Model):
         project_name = "Meu Projeto Padrão"  # Altere para o nome desejado
         
         # Buscar o projeto com base no nome
-        project = self.env['project.project'].search([('name', '=', CRM Services Project)], limit=1)
+        project = self.env['project.project'].search([('name', '=', project_name)], limit=1)
         
         # Se o projeto não existir, cria automaticamente
         if not project:
