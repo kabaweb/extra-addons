@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_crm_lead_form_servicos_opcional" model="ir.ui.view">
+        <field name="name">crm.lead.form.servicos.opcional</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_leads" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Informações Opcionais">
+                    <field name="has_catraca"/>
+                    <field name="has_comanda"/>
+                    <field name="pdv_version"/>
+                    <field name="custom_note"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
