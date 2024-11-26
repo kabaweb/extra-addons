@@ -1,0 +1,13 @@
+<odoo>
+    <record id="crm_webhook_settings" model="ir.ui.view">
+        <field name="name">crm.webhook.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="arch" type="xml">
+            <form string="Configurações do CRM Webhook">
+                <group>
+                    <field name="crm_webhook_url" widget="url"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>
