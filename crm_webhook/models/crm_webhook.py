@@ -6,7 +6,7 @@ class CrmLead(models.Model):
 
     def send_to_webhook(self):
         """Envia informações detalhadas do lead para o webhook ao marcar como 'Ganho'."""
-        webhook_url = "https://meuwebhook.n8n.io/webhook"
+        webhook_url = "https://webhooks.n8nsip.bmhelp.click/webhook/f03821b7-da20-4fdc-8571-e92de27e1a1a"
 
         for record in self:
             # Dados principais do lead
