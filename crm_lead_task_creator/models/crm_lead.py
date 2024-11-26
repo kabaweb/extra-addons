@@ -1,32 +1,27 @@
-from odoo import models, fields
+import logging
+_logger = logging.getLogger(__name__)
 
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
-    def action_set_won_rainbowman(self):
-        """Override the 'Set as Won' action to create a task in a specific project."""
-        res = super(CrmLead, self).action_set_won_rainbowman()
-        
-        # Nome do projeto onde as tarefas serão criadas
-        project_name = "Meu Projeto Padrão"  # Altere para o nome desejado
-        
-        # Buscar o projeto com base no nome
-        project = self.env['project.project'].search([('name', '=', project_name)], limit=1)
-        
-        # Se o projeto não existir, cria automaticamente
+    @api.model
+    def create_task_for_won_lead(self):
+        _logger.info("Iniciando criação de tarefa para a oportunidade: %s", self.name)
+
+        # Buscando o projeto
+        project = self.env['project.project'].search([('name', '=', 'CRM Services Project')], limit=1)
         if not project:
-            project = self.env['project.project'].create({
-                'name': project_name,
-            })
+            _logger.error("Projeto 'CRM Services Project' não encontrado!")
+            raise ValueError("Projeto 'CRM Services Project' não encontrado!")
 
-        # Cria uma tarefa para cada lead ganho
-        for lead in self:
-            self.env['project.task'].create({
-                'name': f"Tarefa para o Lead {lead.name}",
-                'project_id': project.id,
-                'description': lead.description or 'Descrição do lead não fornecida.',
-                'user_id': lead.user_id.id,  # Atribuir responsável do lead como responsável pela tarefa
-                'partner_id': lead.partner_id.id,  # Relacionar a tarefa ao cliente
-            })
+        _logger.info("Projeto encontrado: %s (ID: %s)", project.name, project.id)
 
-        return res
+        # Criando uma tarefa
+        task = self.env['project.task'].create({
+            'name': f"Tarefa para Oportunidade: {self.name}",
+            'project_id': project.id,
+            'description': f"Descrição gerada automaticamente para a oportunidade {self.name}",
+            'user_id': self.user_id.id,
+        })
+
+        _logger.info("Tarefa criada com sucesso: %s (ID: %s)", task.name, task.id)
