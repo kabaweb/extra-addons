@@ -11,7 +11,7 @@ class CrmLead(models.Model):
     def write(self, vals):
         # Identificar se o estágio foi alterado para "Won"
         if 'stage_id' in vals:
-            won_stage = self.env.ref('crm.stage_lead2')  # Substitua pelo XML ID correto do estágio "Won"
+            won_stage = self.env.ref('crm.stage_lead4')  # Substitua pelo XML ID correto do estágio "Won"
             if isinstance(vals['stage_id'], int) and vals['stage_id'] == won_stage.id:
                 for lead in self:
                     # Verifique se um projeto específico está definido
